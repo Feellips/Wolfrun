@@ -19,6 +19,7 @@ public class ButtonController : MonoBehaviour
     {
         _visualRoot = _ui.rootVisualElement;
         _actionButton = _visualRoot.Q<Button>("ActionButton");
+        _visualRoot.visible = false;
     }
 
     private void OnTriggerEnter(Collider other)
