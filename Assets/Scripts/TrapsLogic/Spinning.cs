@@ -14,6 +14,7 @@ public class Spinning : MonoBehaviour
 
     private void Spin()
     {
+        _buttonController.OnMouseDown -= Spin;
         StartCoroutine(nameof(PerformSpinning));
     }
 

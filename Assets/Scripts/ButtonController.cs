@@ -1,23 +1,36 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ButtonController : MonoBehaviour
 {
     [SerializeField] private Transform _button;
+    [SerializeField] private UIDocument _ui;
 
     private Vector3 _translationVector = Vector3.down * 0.005f;
     private bool _pressed = false;
+    private VisualElement _visualRoot;
+
+    private Button _actionButton;
 
     public event MouseDown OnMouseDown;
 
-    private void Update()
+    private void Start()
     {
-
+        _visualRoot = _ui.rootVisualElement;
+        _actionButton = _visualRoot.Q<Button>("ActionButton");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Click();
+        _ui.rootVisualElement.visible = true;
+        _actionButton.clicked += Click;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _actionButton.clicked -= Click;
+        _ui.rootVisualElement.visible = false;
     }
 
     private void Click()
@@ -28,8 +41,6 @@ public class ButtonController : MonoBehaviour
             OnMouseDown?.Invoke();
             StartCoroutine(nameof(AnimateClick));
         }
-
-
     }
 
     private IEnumerator AnimateClick()

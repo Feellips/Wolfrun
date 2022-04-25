@@ -15,6 +15,7 @@ public class Moving : MonoBehaviour
 
     private void Move()
     {
+        _buttonController.OnMouseDown -= Move;
         StartCoroutine(nameof(PerformMove));
     }
 
