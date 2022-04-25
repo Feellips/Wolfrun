@@ -21,7 +21,7 @@ public class Spinning : MonoBehaviour
     {
         for (int i = 0; i < 360; i++)
         {
-            _spinnableObject.Rotate(Vector3.up, i);
+            _spinnableObject.Rotate(Vector3.up);
             yield return null;
         }
     }
